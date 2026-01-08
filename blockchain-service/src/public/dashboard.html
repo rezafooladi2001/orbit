@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Performance Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .metric-card canvas {
+            max-height: 250px;
+        }
+        
+        .success-rate, .uptime {
+            font-size: 3em;
+            font-weight: bold;
+            color: #4CAF50;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .provider-table {
+            margin-top: 40px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+        }
+        
+        .provider-table h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .status-badge {
+            font-size: 1.2em;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        
+        .refresh-info {
+            text-align: right;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>📈 Web3 Performance Metrics</h1>
+        <p class="subtitle">Real-time blockchain performance monitoring and optimization</p>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>RPC Response Times</h3>
+                <canvas id="rpcChart"></canvas>
+            </div>
+            
+            <div class="metric-card">
+                <h3>Gas Price Trends</h3>
+                <canvas id="gasChart"></canvas>
+            </div>
+            
+            <div class="metric-card">
+                <h3>Transaction Success Rate</h3>
+                <div class="success-rate" id="successRate">--</div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>Network Uptime</h3>
+                <div class="uptime" id="uptime">--</div>
+            </div>
+        </div>
+        
+        <div class="provider-table">
+            <h3>RPC Provider Comparison</h3>
+            <div id="providerLoading" class="loading">Loading provider data...</div>
+            <div id="providerError" class="error" style="display: none;"></div>
+            <table style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Latency</th>
+                        <th>Status</th>
+                        <th>Block Number</th>
+                    </tr>
+                </thead>
+                <tbody id="providerData"></tbody>
+            </table>
+        </div>
+        
+        <div class="refresh-info">
+            Auto-refreshing every 30 seconds | Last update: <span id="lastUpdate">--</span>
+        </div>
+    </div>
+    
+    <script>
+        let rpcChart = null;
+        let gasChart = null;
+        
+        // Sample performance data (will be replaced by API calls)
+        let performanceData = {
+            rpcLatencies: [],
+            gasPrices: [],
+            providers: [],
+            successRate: '98.5%',
+            uptime: '99.8%'
+        };
+        
+        // Initialize charts
+        function initializeCharts() {
+            const rpcCtx = document.getElementById('rpcChart').getContext('2d');
+            const gasCtx = document.getElementById('gasChart').getContext('2d');
+            
+            // Destroy existing charts if they exist
+            if (rpcChart) rpcChart.destroy();
+            if (gasChart) gasChart.destroy();
+            
+            // RPC Latency Chart
+            rpcChart = new Chart(rpcCtx, {
+                type: 'line',
+                data: {
+                    labels: performanceData.rpcLatencies.length > 0 
+                        ? performanceData.rpcLatencies.map((_, i) => `${i * 4}:00`)
+                        : ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                    datasets: [{
+                        label: 'RPC Latency (ms)',
+                        data: performanceData.rpcLatencies.length > 0 
+                            ? performanceData.rpcLatencies
+                            : [120, 85, 150, 95, 110, 200],
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Latency (ms)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gas Price Chart
+            gasChart = new Chart(gasCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Gas Price (Gwei)',
+                        data: performanceData.gasPrices.length > 0
+                            ? performanceData.gasPrices
+                            : [45, 52, 38, 67, 42, 55, 48],
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Gas Price (Gwei)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Fetch performance data from API
+        async function fetchPerformanceData() {
+            try {
+                // Fetch benchmark data
+                const benchmarkResponse = await fetch('/api/performance/benchmark');
+                const benchmarkData = await benchmarkResponse.json();
+                
+                if (benchmarkData.success && benchmarkData.data) {
+                    performanceData.providers = benchmarkData.data;
+                    
+                    // Extract latencies
+                    performanceData.rpcLatencies = benchmarkData.data
+                        .filter(p => p.success && p.latency !== 'Timeout')
+                        .map(p => parseInt(p.latency.replace('ms', '')) || 0);
+                }
+                
+                // Fetch metrics
+                const metricsResponse = await fetch('/api/performance/metrics');
+                const metricsData = await metricsResponse.json();
+                
+                if (metricsData.success && metricsData.data) {
+                    const metrics = metricsData.data.metrics;
+                    if (metrics.uptime) {
+                        performanceData.uptime = metrics.uptime.last24h || '99.8%';
+                    }
+                }
+                
+                // Fetch gas price
+                const gasResponse = await fetch('/api/performance/gas-price');
+                const gasData = await gasResponse.json();
+                
+                if (gasData.success && gasData.data) {
+                    // Add gas price to history (keep last 7)
+                    if (performanceData.gasPrices.length >= 7) {
+                        performanceData.gasPrices.shift();
+                    }
+                    performanceData.gasPrices.push(parseInt(gasData.data.recommended) || 20);
+                }
+                
+                updateDashboard();
+            } catch (error) {
+                console.error('Error fetching performance data:', error);
+                document.getElementById('providerError').textContent = 
+                    'Failed to fetch data: ' + error.message;
+                document.getElementById('providerError').style.display = 'block';
+            }
+        }
+        
+        // Update dashboard with fetched data
+        function updateDashboard() {
+            // Update provider table
+            const tbody = document.getElementById('providerData');
+            tbody.innerHTML = '';
+            
+            if (performanceData.providers.length > 0) {
+                document.getElementById('providerLoading').style.display = 'none';
+                document.querySelector('.provider-table table').style.display = 'table';
+                
+                performanceData.providers.forEach(provider => {
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td><strong>${provider.provider}</strong></td>
+                        <td>${provider.latency}</td>
+                        <td class="status-badge">${provider.status}</td>
+                        <td>${provider.blockNumber || 'N/A'}</td>
+                    `;
+                });
+            }
+            
+            // Update success rate and uptime
+            document.getElementById('successRate').textContent = performanceData.successRate;
+            document.getElementById('uptime').textContent = performanceData.uptime;
+            
+            // Update charts
+            initializeCharts();
+            
+            // Update last update time
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        }
+        
+        // Initial load
+        initializeCharts();
+        fetchPerformanceData();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            fetchPerformanceData();
+        }, 30000);
+    </script>
+</body>
+</html>
+

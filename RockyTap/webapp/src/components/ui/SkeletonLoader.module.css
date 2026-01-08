@@ -1,0 +1,261 @@
+.skeleton {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton.animate {
+  background: linear-gradient(
+    90deg,
+    var(--bg-elevated) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    var(--bg-elevated) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.rectangular {
+  border-radius: var(--radius-md);
+}
+
+.rounded {
+  border-radius: var(--radius-lg);
+}
+
+.circular {
+  border-radius: var(--radius-full);
+}
+
+.text {
+  border-radius: var(--radius-xs);
+}
+
+/* Screen reader only text */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skeleton Card */
+.skeletonCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.skeletonContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Wallet Summary Skeleton */
+.walletSkeleton {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.walletHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.walletBalances {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--space-md);
+}
+
+.balanceItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.balanceText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.walletActions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+/* Feature Card Skeleton */
+.featureCardSkeleton {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.featureCardIcon {
+  flex-shrink: 0;
+}
+
+.featureCardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Stat Row Skeleton */
+.statRowSkeleton {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.statDivider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-default);
+}
+
+/* List Item Skeleton */
+.listItemSkeleton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+}
+
+.listItemContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Transaction List Skeleton */
+.transactionListSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Airdrop Screen Skeleton */
+.airdropSkeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+  padding: var(--space-lg);
+}
+
+.airdropHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.airdropCoin {
+  padding: var(--space-xl) 0;
+}
+
+.airdropStats {
+  width: 100%;
+}
+
+/* Lottery Screen Skeleton */
+.lotterySkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-md);
+}
+
+.lotteryHeader {
+  width: 100%;
+}
+
+.lotteryTickets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ticketGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+/* Home Screen Skeleton */
+.homeSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-md);
+}
+
+.homeHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.homeFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton.animate {
+    animation: none;
+    background: var(--bg-elevated);
+  }
+}

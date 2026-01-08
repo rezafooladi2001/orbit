@@ -1,0 +1,177 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.description {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+}
+
+.categories {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.categoryButton {
+  padding: var(--space-xs) var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.categoryButton:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.categoryButton.active {
+  background: var(--gradient-premium);
+  border-color: var(--brand-primary);
+  color: var(--bg-primary);
+}
+
+.tipsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.tipCard {
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.tipCard:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.tipHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.tipIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.tipContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.tipTitle {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.tipCategory {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.tipArrow {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.tipCard.expanded .tipArrow {
+  transform: rotate(90deg);
+}
+
+.tipDescription {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-default);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.tipDescription p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.compactContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.compactTitle {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.compactTips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.compactTip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}
+
+.compactIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.compactText {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .categories {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: var(--space-xs);
+  }
+
+  .categoryButton {
+    flex-shrink: 0;
+  }
+}
+

@@ -1,0 +1,1115 @@
+.container {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-secondary);
+  padding: 4px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tab:hover {
+  color: var(--text-secondary);
+}
+
+.activeTab {
+  background: var(--bg-elevated);
+  color: var(--brand-gold);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+   ACTIVE LOTTERY CARD - New Redesign
+   ============================================ */
+
+.activeLotteryCard {
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, rgba(251, 191, 36, 0.05) 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-xl);
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+  animation: cardAppear 0.5s ease-out;
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer effect on card */
+.activeLotteryCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.04) 50%,
+    transparent 100%
+  );
+  animation: cardShimmer 4s ease-in-out infinite;
+}
+
+@keyframes cardShimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Lottery Type Badge */
+.lotteryTypeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+}
+
+.typeBadgeIcon {
+  font-size: 14px;
+}
+
+.typeBadgeText {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--brand-gold);
+}
+
+/* Lottery Title */
+.lotteryTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+/* Prize Pool Hero Section */
+.prizePoolHero {
+  text-align: center;
+  padding: 24px 16px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-gold);
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Prize shimmer animation */
+.prizePoolHero::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 215, 0, 0.08) 60deg,
+    transparent 120deg
+  );
+  animation: prizeRotate 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes prizeRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.prizePoolLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.prizePoolAmount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.currencySymbol {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--brand-gold);
+}
+
+.prizeValue {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: prizeGlow 2s ease-in-out infinite;
+}
+
+@keyframes prizeGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+.currencyLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Countdown Section */
+.countdownSection {
+  margin-bottom: 20px;
+}
+
+.countdownLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.2s ease;
+}
+
+.statCard:hover {
+  border-color: var(--border-gold);
+  background: rgba(251, 191, 36, 0.05);
+}
+
+.statIcon {
+  font-size: 24px;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Purchase Section */
+.purchaseSection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.purchaseHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.totalCostDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(251, 191, 36, 0.1);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-gold);
+}
+
+.totalLabel {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.totalValue {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--brand-gold);
+}
+
+/* Legacy styles for compatibility */
+.lotteryInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.prizePool {
+  text-align: center;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-gold);
+}
+
+.prizeLabel {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.infoLabel {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.infoValue {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Time Remaining (legacy + urgency states) */
+.timeRemaining {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+.timeRemaining.normal {
+  background: var(--bg-tertiary);
+}
+
+.timeRemaining.warning {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.timeRemaining.warning .timeText {
+  color: #f59e0b;
+}
+
+.timeRemaining.critical {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  animation: criticalPulse 1s ease-in-out infinite;
+}
+
+.timeRemaining.critical .timeText {
+  color: #ef4444;
+}
+
+@keyframes criticalPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.timeIcon {
+  font-size: 16px;
+}
+
+.timeText {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--brand-gold);
+}
+
+.totalCost {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.costValue {
+  font-weight: 600;
+  color: var(--brand-gold);
+}
+
+/* ============================================
+   HISTORY SECTION - Enhanced Design
+   ============================================ */
+
+.historySection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.historyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.historyHeaderTitle {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.historyCount {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* History Card */
+.historyCard {
+  display: flex;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  animation: historyCardAppear 0.4s ease-out backwards;
+}
+
+.historyCard.clickable {
+  cursor: pointer;
+}
+
+.historyCard.clickable:hover {
+  border-color: var(--border-gold);
+  transform: translateX(4px);
+}
+
+.historyCard.clickable:active {
+  transform: translateX(2px);
+}
+
+@keyframes historyCardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Status Indicator Bar */
+.historyStatusIndicator {
+  width: 4px;
+  flex-shrink: 0;
+}
+
+.historyStatusIndicator.finished {
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+}
+
+.historyStatusIndicator.active {
+  background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+  animation: activeIndicatorPulse 1.5s ease-in-out infinite;
+}
+
+.historyStatusIndicator.upcoming {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+}
+
+@keyframes activeIndicatorPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.historyCardContent {
+  flex: 1;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Top Row */
+.historyTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.historyTitleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.historyTitle {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.historyBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.historyBadge.finished {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.historyBadge.active {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--brand-gold);
+  border: 1px solid var(--border-gold);
+  animation: activeBadgePulse 2s ease-in-out infinite;
+}
+
+.historyBadge.upcoming {
+  background: rgba(59, 130, 246, 0.12);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+@keyframes activeBadgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.3); }
+  50% { box-shadow: 0 0 8px 2px rgba(251, 191, 36, 0.2); }
+}
+
+/* Prize Section */
+.historyPrizeSection {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.historyPrizeLabel {
+  display: block;
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.historyPrizeValue {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--brand-gold);
+}
+
+/* Bottom Row */
+.historyBottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.historyDate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.historyDateIcon {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.historyDateText {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.historyViewWinners {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand-gold);
+  transition: gap 0.2s ease;
+}
+
+.historyCard.clickable:hover .historyViewWinners {
+  gap: 8px;
+}
+
+.arrowIcon {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.historyCard.clickable:hover .arrowIcon {
+  transform: translateX(2px);
+}
+
+/* Legacy styles for compatibility */
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.historyInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.historyStatus {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.historyStatus.finished {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid var(--success-border);
+}
+
+.historyStatus.active {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--brand-gold);
+  border: 1px solid var(--border-gold);
+}
+
+.historyStatus.upcoming {
+  background: rgba(59, 130, 246, 0.12);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.historyPrize {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--brand-gold);
+}
+
+/* ============================================
+   WINNERS MODAL - Enhanced Celebration
+   ============================================ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: var(--z-modal);
+  animation: fadeIn 0.2s ease-out;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Confetti Container */
+.confettiContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  border-radius: 2px;
+  animation: confettiFall 3s ease-out forwards;
+}
+
+.confetti:nth-child(odd) {
+  width: 8px;
+  height: 12px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.modalContent {
+  background: linear-gradient(180deg, #1a1f2e 0%, #0d1117 100%);
+  border-radius: 28px 28px 0 0;
+  padding: 28px 20px;
+  padding-bottom: max(28px, env(safe-area-inset-bottom));
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-top: 2px solid var(--border-gold);
+  box-shadow: 0 -10px 50px rgba(255, 215, 0, 0.15);
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modalHeader {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.celebrationEmojis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 32px;
+}
+
+.trophyIcon {
+  font-size: 56px;
+  animation: trophyBounce 0.8s ease infinite alternate;
+  display: inline-block;
+}
+
+@keyframes trophyBounce {
+  from { transform: translateY(0) rotate(-8deg) scale(1); }
+  to { transform: translateY(-12px) rotate(8deg) scale(1.1); }
+}
+
+.modalTitle {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+.modalSubtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 8px 0 0;
+}
+
+.modalPrizePool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  padding: 12px 24px;
+  background: rgba(251, 191, 36, 0.1);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-gold);
+}
+
+.modalPrizeLabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.modalPrizeValue {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--brand-gold);
+}
+
+/* Winners List */
+.winnersList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.winnersList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.winnersList::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+.winnersList::-webkit-scrollbar-thumb {
+  background: rgba(251, 191, 36, 0.3);
+  border-radius: 2px;
+}
+
+.winnerItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  animation: winnerAppear 0.4s ease-out backwards;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.winnerItem:hover {
+  transform: translateX(4px);
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.winnerItem.topWinner {
+  border-width: 2px;
+}
+
+.winnerItem:nth-child(1) {
+  animation-delay: 0s;
+  border-color: rgba(255, 215, 0, 0.5);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, var(--bg-elevated) 100%);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.winnerItem:nth-child(2) {
+  animation-delay: 0.08s;
+  border-color: rgba(192, 192, 192, 0.4);
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.08) 0%, var(--bg-elevated) 100%);
+}
+
+.winnerItem:nth-child(3) {
+  animation-delay: 0.16s;
+  border-color: rgba(205, 127, 50, 0.4);
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.08) 0%, var(--bg-elevated) 100%);
+}
+
+@keyframes winnerAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Winner Rank Section */
+.winnerRankSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+}
+
+.rankEmoji {
+  font-size: 24px;
+}
+
+.rankNumber {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* Winner Info Section */
+.winnerInfoSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.winnerName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.winnerUsername {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Winner Prize Section */
+.winnerPrizeSection {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.winnerPrize {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: #10b981;
+  display: block;
+}
+
+.prizeLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Legacy compat */
+.winnerRank {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  min-width: 40px;
+  text-align: center;
+}
+
+.winnerItem:nth-child(1) .winnerRank {
+  color: #FFD700;
+}
+
+.winnerItem:nth-child(2) .winnerRank {
+  color: #C0C0C0;
+}
+
+.winnerItem:nth-child(3) .winnerRank {
+  color: #CD7F32;
+}
+
+.winnerItem:nth-child(n+4) .winnerRank {
+  color: var(--text-muted);
+}
+
+/* Modal Actions */
+.modalActions {
+  margin-top: 8px;
+}
+
+/* ============================================
+   PENDING REWARDS SECTION
+   ============================================ */
+
+.pendingRewardsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pendingRewardsInfo {
+  text-align: center;
+}
+
+.pendingAmount {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.pendingDescription {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 380px) {
+  .activeLotteryCard {
+    padding: 20px 16px;
+  }
+
+  .prizeValue {
+    font-size: 36px;
+  }
+
+  .statsGrid {
+    gap: 8px;
+  }
+
+  .statCard {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .statIcon {
+    font-size: 20px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .activeLotteryCard::before,
+  .prizePoolHero::after,
+  .modalIcon,
+  .prizeValue,
+  .timeRemaining.critical {
+    animation: none;
+  }
+}

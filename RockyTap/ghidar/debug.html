@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Ghidar SDK Debug</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0c10; 
+            color: #e5e7eb; 
+            padding: 16px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        h1 { color: #10b981; font-size: 20px; margin-bottom: 16px; }
+        h2 { color: #fbbf24; font-size: 14px; margin: 16px 0 8px 0; }
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-weight: bold;
+        }
+        .success { background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; }
+        .error { background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; }
+        .warning { background: rgba(251, 191, 36, 0.2); border: 1px solid #fbbf24; }
+        pre { 
+            background: #1a1a2e; 
+            padding: 12px; 
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 11px;
+            line-height: 1.5;
+            border: 1px solid #333;
+        }
+        .key { color: #10b981; }
+        .value { color: #fbbf24; }
+        .copy-btn {
+            background: #10b981;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 16px;
+        }
+        .section { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Telegram SDK Debug</h1>
+    <div id="status"></div>
+    <div id="output"></div>
+    <button class="copy-btn" onclick="copyToClipboard()">📋 Copy Debug Info</button>
+    
+    <script>
+        let debugData = {};
+        
+        function formatValue(value) {
+            if (value === null) return '<span class="value">null</span>';
+            if (value === undefined) return '<span class="value">undefined</span>';
+            if (typeof value === 'boolean') return '<span class="value">' + value + '</span>';
+            if (typeof value === 'number') return '<span class="value">' + value + '</span>';
+            if (typeof value === 'string') {
+                if (value.length > 100) {
+                    return '<span class="value">"' + value.substring(0, 100) + '..."</span> <small>(' + value.length + ' chars)</small>';
+                }
+                return '<span class="value">"' + value + '"</span>';
+            }
+            if (typeof value === 'object') {
+                return '<pre>' + JSON.stringify(value, null, 2) + '</pre>';
+            }
+            return String(value);
+        }
+        
+        function getDebugInfo() {
+            const info = {
+                // Timestamps
+                timestamp: new Date().toISOString(),
+                loadTime: performance.now().toFixed(2) + 'ms',
+                
+                // Environment
+                userAgent: navigator.userAgent,
+                url: window.location.href,
+                origin: window.location.origin,
+                pathname: window.location.pathname,
+                search: window.location.search || '(empty)',
+                hash: window.location.hash || '(empty)',
+                referrer: document.referrer || '(empty)',
+                
+                // Iframe check
+                inIframe: window !== window.parent,
+                parentOrigin: null,
+            
+                // Telegram checks
+                telegramObjectExists: typeof window.Telegram !== 'undefined',
+                webAppExists: false,
+                
+                // SDK Data
+                initData: null,
+                initDataLength: 0,
+                initDataUnsafe: null,
+                platform: null,
+                version: null,
+                colorScheme: null,
+                isExpanded: null,
+                viewportHeight: null,
+                
+                // User info
+                user: null
+            };
+            
+            // Try to get parent origin
+            try {
+                if (window !== window.parent) {
+                    info.parentOrigin = document.referrer || 'cannot detect';
+                }
+            } catch(e) {
+                info.parentOrigin = 'blocked by CORS';
+            }
+            
+            // Check Telegram WebApp
+            if (window.Telegram && window.Telegram.WebApp) {
+                info.webAppExists = true;
+                const wa = window.Telegram.WebApp;
+                
+                // Get all SDK properties
+                info.initData = wa.initData || '';
+                info.initDataLength = wa.initData ? wa.initData.length : 0;
+                info.platform = wa.platform;
+                info.version = wa.version;
+                info.colorScheme = wa.colorScheme;
+                info.isExpanded = wa.isExpanded;
+                info.viewportHeight = wa.viewportHeight;
+                info.viewportStableHeight = wa.viewportStableHeight;
+                info.headerColor = wa.headerColor;
+                info.backgroundColor = wa.backgroundColor;
+                
+                // Get initDataUnsafe
+                if (wa.initDataUnsafe) {
+                    info.initDataUnsafe = {
+                        query_id: wa.initDataUnsafe.query_id || null,
+                        auth_date: wa.initDataUnsafe.auth_date || null,
+                        hash: wa.initDataUnsafe.hash ? '(present, ' + wa.initDataUnsafe.hash.length + ' chars)' : null,
+                        user: wa.initDataUnsafe.user || null,
+                        receiver: wa.initDataUnsafe.receiver || null,
+                        chat: wa.initDataUnsafe.chat || null,
+                        start_param: wa.initDataUnsafe.start_param || null
+                    };
+                    
+                    if (wa.initDataUnsafe.user) {
+                        info.user = wa.initDataUnsafe.user;
+                    }
+                }
+                
+                // Call ready() and expand()
+                try {
+                    wa.ready();
+                    info.readyCalled = true;
+                } catch(e) {
+                    info.readyError = e.message;
+                }
+                
+                try {
+                    wa.expand();
+                    info.expandCalled = true;
+                } catch(e) {
+                    info.expandError = e.message;
+                }
+            }
+            
+            // Check for tgWebAppData in URL (legacy method)
+            if (window.location.hash) {
+                const hashData = window.location.hash.substring(1);
+                const params = new URLSearchParams(hashData);
+                if (params.has('tgWebAppData')) {
+                    info.tgWebAppDataInHash = true;
+                    info.hashDataLength = params.get('tgWebAppData').length;
+                }
+            }
+            
+            if (window.location.search) {
+                const searchParams = new URLSearchParams(window.location.search);
+                if (searchParams.has('tgWebAppData')) {
+                    info.tgWebAppDataInSearch = true;
+                }
+            }
+            
+            return info;
+        }
+        
+        function displayInfo() {
+            debugData = getDebugInfo();
+            
+            // Status
+            let statusHtml = '';
+            if (debugData.initDataLength > 0) {
+                statusHtml = '<div class="status success">✅ SUCCESS: initData is present (' + debugData.initDataLength + ' characters)</div>';
+            } else if (debugData.webAppExists) {
+                statusHtml = '<div class="status error">❌ ERROR: Telegram SDK loaded but initData is EMPTY</div>';
+                statusHtml += '<div class="status warning">⚠️ This usually means BotFather domain is not configured</div>';
+            } else if (debugData.telegramObjectExists) {
+                statusHtml = '<div class="status error">❌ ERROR: Telegram object exists but WebApp is not available</div>';
+            } else {
+                statusHtml = '<div class="status error">❌ ERROR: Telegram SDK not found</div>';
+            }
+            document.getElementById('status').innerHTML = statusHtml;
+            
+            // Build output
+            let html = '';
+            
+            // User Section
+            if (debugData.user) {
+                html += '<div class="section"><h2>👤 User</h2>';
+                html += '<pre>' + JSON.stringify(debugData.user, null, 2) + '</pre></div>';
+            }
+            
+            // SDK Section
+            html += '<div class="section"><h2>📱 Telegram SDK</h2><pre>';
+            html += '<span class="key">telegramObjectExists:</span> ' + formatValue(debugData.telegramObjectExists) + '\n';
+            html += '<span class="key">webAppExists:</span> ' + formatValue(debugData.webAppExists) + '\n';
+            html += '<span class="key">platform:</span> ' + formatValue(debugData.platform) + '\n';
+            html += '<span class="key">version:</span> ' + formatValue(debugData.version) + '\n';
+            html += '<span class="key">initDataLength:</span> ' + formatValue(debugData.initDataLength) + '\n';
+            html += '<span class="key">isExpanded:</span> ' + formatValue(debugData.isExpanded) + '\n';
+            html += '</pre></div>';
+            
+            // initData Section
+            html += '<div class="section"><h2>🔐 Authentication Data</h2><pre>';
+            if (debugData.initDataLength > 0) {
+                html += '<span class="key">initData:</span> ' + formatValue(debugData.initData) + '\n\n';
+            } else {
+                html += '<span class="key">initData:</span> <span style="color:#ef4444">(EMPTY - This is the problem!)</span>\n\n';
+            }
+            if (debugData.initDataUnsafe) {
+                html += '<span class="key">initDataUnsafe:</span>\n';
+                html += JSON.stringify(debugData.initDataUnsafe, null, 2);
+            }
+            html += '</pre></div>';
+            
+            // Environment Section
+            html += '<div class="section"><h2>🌐 Environment</h2><pre>';
+            html += '<span class="key">inIframe:</span> ' + formatValue(debugData.inIframe) + '\n';
+            html += '<span class="key">url:</span> ' + formatValue(debugData.url) + '\n';
+            html += '<span class="key">referrer:</span> ' + formatValue(debugData.referrer) + '\n';
+            html += '<span class="key">userAgent:</span> ' + formatValue(debugData.userAgent) + '\n';
+            html += '</pre></div>';
+            
+            // Help Section if error
+            if (debugData.initDataLength === 0) {
+                html += '<div class="section"><h2>🆘 How to Fix</h2><pre style="color:#fbbf24;">';
+                html += '1. Go to @BotFather in Telegram\n';
+                html += '2. Send: /mybots\n';
+                html += '3. Select your bot (@Ghidar_bot)\n';
+                html += '4. Tap: Bot Settings → Domain\n';
+                html += '5. Enter: ghidar.com\n';
+                html += '6. Restart Telegram and try again\n';
+                html += '</pre></div>';
+            }
+            
+            document.getElementById('output').innerHTML = html;
+        }
+        
+        function copyToClipboard() {
+            const text = JSON.stringify(debugData, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Debug info copied to clipboard!');
+            }).catch(err => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('Debug info copied to clipboard!');
+            });
+        }
+        
+        // Run immediately and after delays
+        displayInfo();
+        setTimeout(displayInfo, 500);
+        setTimeout(displayInfo, 1500);
+        setTimeout(displayInfo, 3000);
+    </script>
+</body>
+</html>

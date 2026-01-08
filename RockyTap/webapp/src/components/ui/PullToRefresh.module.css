@@ -1,0 +1,51 @@
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 0; /* Allow shrinking in flex context */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* Remove overflow - parent handles scrolling */
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out;
+}
+
+.spinnerWrapper {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  font-size: 20px;
+  color: var(--brand-primary);
+  transition: transform 0.2s ease-out;
+}
+
+.text {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.content {
+  flex: 1;
+  transition: transform 0.1s ease-out;
+}
+

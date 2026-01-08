@@ -1,0 +1,322 @@
+/**
+ * LiveUserCounter Styles - Enhanced with premium pulsing indicator
+ */
+
+.container {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(52, 211, 153, 0.06) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  color: var(--brand-primary);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+/* Subtle shimmer effect */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.15), transparent);
+  animation: counterShimmer 4s ease-in-out infinite;
+}
+
+@keyframes counterShimmer {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.container:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(52, 211, 153, 0.1) 100%);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);
+}
+
+/* Indicator with concentric rings */
+.indicator {
+  position: relative;
+  width: 10px;
+  height: 10px;
+}
+
+.dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: var(--brand-primary);
+  border-radius: 50%;
+  z-index: 2;
+  animation: dotPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.7;
+  }
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  border-radius: 50%;
+  animation: ringExpand 2s ease-out infinite;
+  z-index: 1;
+}
+
+@keyframes ringExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+}
+
+.count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: #34d399;
+  font-variant-numeric: tabular-nums;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+  position: relative;
+  z-index: 1;
+}
+
+.count.updating {
+  transform: scale(1.08);
+  color: #10b981;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.label {
+  font-weight: 500;
+  color: #6ee7b7;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   COMPACT VARIANT
+   ============================================ */
+
+.compact {
+  padding: 6px 12px;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.compact .indicator {
+  width: 8px;
+  height: 8px;
+}
+
+.compact .dot {
+  width: 6px;
+  height: 6px;
+}
+
+.compact .ring {
+  width: 14px;
+  height: 14px;
+}
+
+.compact .count {
+  font-size: 13px;
+}
+
+.compact .label {
+  font-size: 11px;
+}
+
+/* ============================================
+   LARGE VARIANT
+   ============================================ */
+
+.large {
+  padding: 14px 24px;
+  gap: 12px;
+  border-radius: var(--radius-xl);
+}
+
+.large .indicator {
+  width: 12px;
+  height: 12px;
+}
+
+.large .dot {
+  width: 10px;
+  height: 10px;
+}
+
+.large .ring {
+  width: 24px;
+  height: 24px;
+}
+
+.large .count {
+  font-size: 20px;
+}
+
+.large .label {
+  font-size: 14px;
+}
+
+/* ============================================
+   MINIMAL VARIANT
+   ============================================ */
+
+.minimal {
+  background: transparent;
+  border: none;
+  padding: 0;
+  gap: 6px;
+}
+
+.minimal::before {
+  display: none;
+}
+
+.minimal .indicator {
+  width: 6px;
+  height: 6px;
+}
+
+.minimal .dot {
+  width: 6px;
+  height: 6px;
+}
+
+.minimal .ring {
+  display: none;
+}
+
+.minimal .count {
+  font-size: 13px;
+  color: var(--brand-primary);
+}
+
+.minimal .label {
+  display: none;
+}
+
+/* ============================================
+   CARD VARIANT
+   ============================================ */
+
+.card {
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-lg) var(--space-xl);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(26, 32, 48, 0.9) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-lg);
+  gap: var(--space-sm);
+}
+
+.card::before {
+  display: none;
+}
+
+.card .indicator {
+  width: 14px;
+  height: 14px;
+  margin-bottom: var(--space-xs);
+}
+
+.card .dot {
+  width: 12px;
+  height: 12px;
+}
+
+.card .ring {
+  width: 28px;
+  height: 28px;
+}
+
+.card .count {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.card .label {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .container::before {
+    animation: none;
+    display: none;
+  }
+
+  .dot,
+  .ring {
+    animation: none;
+  }
+
+  .ring {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .count.updating {
+    transform: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 380px) {
+  .container {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .count {
+    font-size: 14px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .large {
+    padding: 12px 18px;
+  }
+
+  .large .count {
+    font-size: 18px;
+  }
+}

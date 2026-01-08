@@ -1,0 +1,34 @@
+{
+  "name": "ghidar/app",
+  "description": "Ghidar backend (originally Rocky clicker backend)",
+  "type": "project",
+  "require": {
+    "php": "^8.1",
+    "vlucas/phpdotenv": "^5.6",
+    "ext-openssl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-curl": "*",
+    "kornrunner/keccak": "^1.1",
+    "simplito/elliptic-php": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ghidar\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "suggest": {
+    "ext-gmp": "For faster cryptographic operations",
+    "ext-bcmath": "Alternative math library for cryptographic operations",
+    "sop/crypto-encoding": "For advanced cryptographic encoding"
+  }
+}
+

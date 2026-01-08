@@ -1,0 +1,20 @@
+{
+  "appName": "Ghidar",
+  "appVersion": "1.0.0",
+  "apiUrl": "/RockyTap/api",
+  "baseUrl": "/",
+  "mode": "production",
+  "isDev": false,
+  "isProd": true,
+  "features": {
+    "airdrop": true,
+    "lottery": true,
+    "aiTrader": true,
+    "referral": true
+  },
+  "theme": {
+    "primaryColor": "#10b981",
+    "goldColor": "#fbbf24",
+    "backgroundColor": "#0a0c10"
+  }
+}

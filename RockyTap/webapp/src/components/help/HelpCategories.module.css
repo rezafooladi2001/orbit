@@ -1,0 +1,134 @@
+.categoriesSection {
+  padding: 0 20px;
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
+}
+
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 80px;
+}
+
+.categoryCard:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.categoryCard.active {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: white;
+}
+
+.categoryIcon {
+  font-size: 24px;
+}
+
+.categoryLabel {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-align: center;
+}
+
+.categoryCard.active .categoryLabel {
+  color: white;
+}
+
+.articlesSection {
+  padding: 0 20px;
+  margin-bottom: 24px;
+}
+
+.articlesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.articleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.articleTitle {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.articleCategory {
+  font-size: var(--text-xs);
+  color: var(--brand-primary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.articleExcerpt {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.noArticles {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 32px 20px;
+  margin: 0;
+}
+
+.contactSection {
+  padding: 0 20px;
+  margin-top: auto;
+}
+
+.contactContent {
+  text-align: center;
+}
+
+.contactTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.contactText {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0 0 16px 0;
+}
+

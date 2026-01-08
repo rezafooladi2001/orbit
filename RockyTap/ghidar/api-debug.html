@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Debug</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #1a1a2e; color: #fff; padding: 20px; }
+        .log { background: #0d0d1a; padding: 10px; margin: 5px 0; border-radius: 5px; font-size: 12px; }
+        .success { border-left: 3px solid #10b981; }
+        .error { border-left: 3px solid #ef4444; }
+        .info { border-left: 3px solid #3b82f6; }
+        button { background: #10b981; border: none; padding: 10px 20px; color: #000; cursor: pointer; margin: 5px; border-radius: 5px; }
+        pre { background: #0d0d1a; padding: 10px; overflow: auto; font-size: 10px; }
+    </style>
+</head>
+<body>
+    <h2>🔧 API Debug</h2>
+    <div id="logs"></div>
+    
+    <button onclick="testHealth()">Test /health/</button>
+    <button onclick="testMe()">Test /me/</button>
+    <button onclick="clearLogs()">Clear</button>
+    
+    <h3>initData:</h3>
+    <pre id="initData">Loading...</pre>
+    
+    <script>
+        const logs = document.getElementById('logs');
+        let initData = '';
+        
+        function log(msg, type = 'info') {
+            const div = document.createElement('div');
+            div.className = 'log ' + type;
+            div.textContent = new Date().toISOString().substr(11, 12) + ' - ' + msg;
+            logs.appendChild(div);
+            logs.scrollTop = logs.scrollHeight;
+        }
+        
+        function clearLogs() { logs.innerHTML = ''; }
+        
+        // Init Telegram
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+            initData = window.Telegram.WebApp.initData || '';
+            document.getElementById('initData').textContent = initData || '(empty)';
+            log('initData length: ' + initData.length, initData.length > 0 ? 'success' : 'error');
+        } else {
+            log('Telegram SDK not found', 'error');
+        }
+        
+        async function testHealth() {
+            log('Testing /api/health/...');
+            try {
+                const res = await fetch('/RockyTap/api/health/', {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+                log('Health: ' + res.status + ' - ' + JSON.stringify(data).substr(0, 100), 'success');
+            } catch (e) {
+                log('Health FAILED: ' + e.message, 'error');
+            }
+        }
+        
+        async function testMe() {
+            log('Testing /api/me/...');
+            log('Using initData: ' + (initData.length > 0 ? initData.length + ' chars' : 'EMPTY'));
+            try {
+                const res = await fetch('/RockyTap/api/me/', {
+                    method: 'GET',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Telegram-Data': initData
+                    }
+                });
+                const data = await res.json();
+                log('/me/: ' + res.status + ' - ' + JSON.stringify(data).substr(0, 200), res.ok ? 'success' : 'error');
+            } catch (e) {
+                log('/me/ FAILED: ' + e.name + ': ' + e.message, 'error');
+            }
+        }
+        
+        // Auto-test on load
+        setTimeout(() => {
+            testHealth();
+            setTimeout(testMe, 500);
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Ghidar - Secure Crypto Opportunities on Telegram</title>
+    <meta name="title" content="Ghidar - Secure Crypto Opportunities on Telegram" />
+    <meta name="description" content="Your secure gateway to crypto opportunities. Mine GHD tokens, participate in lotteries, let AI trade for you, and earn from referrals. All powered by Telegram's trusted platform." />
+    <meta name="keywords" content="Ghidar, Telegram Mini App, cryptocurrency, GHD tokens, crypto lottery, AI trading, referral program, secure wallet, USDT, blockchain" />
+    <meta name="author" content="Ghidar" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Theme and App Configuration -->
+    <meta name="theme-color" content="#0a0c10" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Ghidar" />
+    <meta name="application-name" content="Ghidar" />
+    <meta name="format-detection" content="telephone=no" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ghidar.app/" />
+    <meta property="og:title" content="Ghidar - Secure Crypto Opportunities on Telegram" />
+    <meta property="og:description" content="Your secure gateway to crypto opportunities. Mine GHD tokens, participate in lotteries, let AI trade for you, and earn from referrals." />
+    <meta property="og:image" content="https://ghidar.app/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ghidar - Crypto Opportunities Platform" />
+    <meta property="og:site_name" content="Ghidar" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://ghidar.app/" />
+    <meta name="twitter:title" content="Ghidar - Secure Crypto Opportunities on Telegram" />
+    <meta name="twitter:description" content="Your secure gateway to crypto opportunities. Mine GHD tokens, participate in lotteries, let AI trade for you, and earn from referrals." />
+    <meta name="twitter:image" content="https://ghidar.app/images/twitter-card.png" />
+    <meta name="twitter:image:alt" content="Ghidar - Crypto Opportunities Platform" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ghidar.app/" />
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://telegram.org" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://telegram.org" />
+    
+    <!-- Google Fonts - Non-render-blocking with font-display: swap -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" />
+    </noscript>
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Ghidar",
+      "description": "Your secure gateway to crypto opportunities. Mine GHD tokens, participate in lotteries, let AI trade for you, and earn from referrals.",
+      "url": "https://ghidar.app/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Ghidar"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "10000"
+      },
+      "featureList": [
+        "GHD Token Mining",
+        "Weekly Lottery Draws",
+        "AI-Powered Trading",
+        "Referral Program",
+        "Secure Wallet Management"
+      ],
+      "screenshot": "https://ghidar.app/images/screenshot.png",
+      "softwareVersion": "1.0.0"
+    }
+    </script>
+    
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Critical CSS for Loading State -->
+    <style>
+      /* Prevent flash of unstyled content */
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #0a0c10;
+        color: #f8fafc;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        min-height: 100%;
+        min-height: 100dvh;
+      }
+      
+      #root {
+        min-height: 100%;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* Initial loading animation */
+      .initial-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #0a0c10;
+        z-index: 9999;
+        transition: opacity 0.3s ease;
+      }
+      
+      .initial-loader.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      
+      .initial-loader-spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid rgba(16, 185, 129, 0.2);
+        border-top-color: #10b981;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      .initial-loader-text {
+        margin-top: 16px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+    <script type="module" crossorigin src="/RockyTap/assets/ghidar/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/RockyTap/assets/ghidar/vendor-ClzKoyBC.js">
+    <link rel="modulepreload" crossorigin href="/RockyTap/assets/ghidar/vendor-react-YPcjOoVK.js">
+    <link rel="modulepreload" crossorigin href="/RockyTap/assets/ghidar/verification-BQpERxd6.js">
+    <link rel="modulepreload" crossorigin href="/RockyTap/assets/ghidar/settings-058XNVr4.js">
+    <link rel="modulepreload" crossorigin href="/RockyTap/assets/ghidar/screens-B1bwO18J.js">
+    <link rel="modulepreload" crossorigin href="/RockyTap/assets/ghidar/onboarding-Dp2JK-0r.js">
+    <link rel="modulepreload" crossorigin href="/RockyTap/assets/ghidar/ui-components-vOhTeZ_N.js">
+    <link rel="stylesheet" crossorigin href="/RockyTap/assets/ghidar/styles-CVKc_DQ3.css">
+    <link rel="stylesheet" crossorigin href="/RockyTap/assets/ghidar/styles-4lelJ8lP.css">
+    <link rel="stylesheet" crossorigin href="/RockyTap/assets/ghidar/styles-C9cBOXFu.css">
+    <link rel="stylesheet" crossorigin href="/RockyTap/assets/ghidar/styles-LwhVGTDn.css">
+    <link rel="stylesheet" crossorigin href="/RockyTap/assets/ghidar/styles-BV4Z5Niv.css">
+    <link rel="stylesheet" crossorigin href="/RockyTap/assets/ghidar/styles-Bw-AIanE.css">
+  </head>
+  <body>
+    <!-- Initial loader shown before React hydrates -->
+    <div id="initial-loader" class="initial-loader" aria-live="polite" aria-busy="true">
+      <div class="initial-loader-spinner" role="status" aria-label="Loading"></div>
+      <p class="initial-loader-text">Loading Ghidar...</p>
+    </div>
+    
+    <div id="root" role="application" aria-label="Ghidar Mini App"></div>
+    
+    
+    <!-- Hide initial loader when React signals it's ready -->
+    <script>
+      // Global function for React to call when app is ready
+      window.__GHIDAR_APP_READY__ = false;
+      window.hideInitialLoader = function() {
+        if (window.__GHIDAR_APP_READY__) return; // Prevent double calls
+        window.__GHIDAR_APP_READY__ = true;
+        
+        var loader = document.getElementById('initial-loader');
+        if (loader) {
+          loader.classList.add('hidden');
+          // Remove from DOM after transition completes
+          setTimeout(function() {
+            if (loader.parentNode) {
+              loader.remove();
+            }
+          }, 350);
+        }
+      };
+      
+      // Fallback: If React fails to load or takes too long, 
+      // hide loader after 8 seconds to prevent infinite loading state
+      setTimeout(function() {
+        if (!window.__GHIDAR_APP_READY__) {
+          console.warn('[Ghidar] Fallback loader hide triggered after 8s timeout');
+          window.hideInitialLoader();
+        }
+      }, 8000);
+    </script>
+    
+    <!-- No-JS fallback -->
+    <noscript>
+      <div style="padding: 40px; text-align: center; color: #f8fafc; background: #0a0c10; min-height: 100vh;">
+        <h1>Ghidar requires JavaScript</h1>
+        <p>Please enable JavaScript in your browser to use Ghidar.</p>
+        <p>For the best experience, open this app from the Telegram bot.</p>
+      </div>
+    </noscript>
+  </body>
+</html>

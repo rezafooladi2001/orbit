@@ -1,0 +1,127 @@
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  padding: 8px 4px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+
+.navContent {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  gap: 2px;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  /* Ensure minimum touch target of 48x48px (Material Design spec) */
+  min-height: 48px;
+  min-width: 48px;
+  padding: 6px 2px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  position: relative;
+  /* Prevent text selection on rapid taps */
+  -webkit-user-select: none;
+  user-select: none;
+  /* Improve touch response */
+  touch-action: manipulation;
+}
+
+.tab:hover {
+  background: var(--bg-tertiary);
+}
+
+.tab:active {
+  transform: scale(0.95);
+}
+
+.iconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.icon {
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--brand-primary);
+  border-radius: 50%;
+  animation: fadeInScale 0.2s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+  letter-spacing: 0.1px;
+  line-height: 1.2;
+}
+
+.active {
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.active .icon {
+  transform: scale(1.05);
+}
+
+.active .label {
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+
+/* Ripple effect on tap */
+.tab::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  background: var(--brand-primary);
+  opacity: 0;
+  transform: scale(0);
+  transition: none;
+}
+
+.tab:active::after {
+  opacity: 0.1;
+  transform: scale(1);
+  transition: all 0.2s ease-out;
+}

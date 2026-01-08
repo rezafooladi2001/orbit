@@ -1,32 +1,63 @@
-# Dependencies
-node_modules/
-vendor/
-package-lock.json
-
-# Build outputs
-dist/
-build/
-*.log
-
-# Environment variables
+# Environment files
 .env
 .env.local
-.env.production
+.env.*.local
+RockyTap/public/.env
 
-# IDE
-.vscode/
+# Dependencies
+vendor/
+node_modules/
+RockyTap/webapp/node_modules/
+blockchain-service/node_modules/
+blockchain-service/dist/
+
+# Build artifacts
+RockyTap/assets/index-*.js
+RockyTap/assets/index-*.css
+RockyTap/assets/new/
+
+# Logs
+*.log
+RockyTap/storage/logs/*.log
+!RockyTap/storage/logs/.gitkeep
+
+# Backups
+RockyTap/storage/backups/**/*
+!RockyTap/storage/backups/.gitkeep
+!RockyTap/storage/backups/**/.gitkeep
+
+# Backup and temporary files
+*.bak
+*.old
+*.tmp
+*.temp
+*.png-old
+*.url
+composer.phar
+
+# IDE and editor files
 .idea/
+.vscode/
 *.swp
 *.swo
-
-# OS
+*~
 .DS_Store
 Thumbs.db
 
-# Temporary files
-*.tmp
-*.temp
+# PHP
+.phpunit.result.cache
+phpunit.xml.bak
 
-# Vite
-.vite/
+# Testing
+coverage/
+.phpunit.cache/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 

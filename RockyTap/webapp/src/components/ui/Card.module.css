@@ -1,0 +1,105 @@
+.card {
+  background: var(--gradient-card);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle shine effect on cards */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.default {
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.elevated {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-md);
+}
+
+.bordered {
+  background: transparent;
+  border: 1px solid var(--border-default);
+}
+
+.glow {
+  border: 1px solid var(--border-accent);
+  box-shadow: var(--shadow-glow), var(--shadow-md);
+  background: linear-gradient(145deg, rgba(16, 185, 129, 0.05) 0%, rgba(15, 18, 24, 0.95) 100%);
+}
+
+.glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% -20%, rgba(16, 185, 129, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.gold {
+  border: 1px solid var(--border-gold);
+  box-shadow: var(--shadow-glow-gold), var(--shadow-md);
+  background: linear-gradient(145deg, rgba(251, 191, 36, 0.05) 0%, rgba(15, 18, 24, 0.95) 100%);
+}
+
+.padding-none { padding: 0; }
+.padding-sm { padding: var(--space-sm); }
+.padding-md { padding: var(--space-md); }
+.padding-lg { padding: var(--space-lg); }
+
+.clickable {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  /* Improve touch interaction */
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.clickable:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg);
+}
+
+.clickable:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+.header {
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.content {
+  color: var(--text-secondary);
+}

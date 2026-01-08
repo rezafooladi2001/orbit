@@ -1,0 +1,71 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden; /* Prevent layout from scrolling */
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: var(--z-nav);
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.headerContent {
+  position: relative;
+  z-index: 2;
+}
+
+/* Subtle glow effect behind the logo */
+.headerGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 60px;
+  background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+  min-height: 0; /* Allow flex item to shrink below content size for scrolling */
+  /* Add padding for fixed NavTabs at bottom (~70px) */
+  padding-bottom: 80px;
+}
+
+/* Custom scrollbar for main content */
+.main::-webkit-scrollbar {
+  width: 4px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 2px;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+

@@ -1,0 +1,526 @@
+/**
+ * HomeScreen Styles - Premium Dark Theme
+ * Enhanced with layered gradients, glassmorphism, and micro-interactions
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  animation: pageEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEnter {
+  from { 
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   TRUST SECTION
+   ============================================ */
+
+.trustSection {
+  padding: 0 var(--space-md);
+  animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   WALLET SECTION
+   ============================================ */
+.walletSection {
+  padding: 0 var(--space-md);
+  animation: fadeInUp 0.5s ease-out 0.25s both;
+}
+
+/* Wallet Skeleton */
+.walletSkeleton {
+  padding: var(--space-lg);
+  background: var(--gradient-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+}
+
+.walletSkeletonContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.walletSkeletonBalance {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.walletSkeletonLabel {
+  width: 80px;
+  height: 12px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+.walletSkeletonValue {
+  width: 100px;
+  height: 24px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  animation: skeletonPulse 1.5s ease-in-out infinite 0.1s;
+}
+
+.walletSkeletonDivider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-default);
+}
+
+.walletSkeletonActions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.walletSkeletonButton {
+  flex: 1;
+  height: 36px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  animation: skeletonPulse 1.5s ease-in-out infinite 0.2s;
+}
+
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+/* ============================================
+   FEATURES SECTION
+   ============================================ */
+
+.features {
+  padding: 0 var(--space-md);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-md) var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.featureGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Feature Card - Enhanced with gradient borders and glow */
+.featureCard {
+  position: relative;
+  animation: featureEnter 0.4s ease-out both;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.featureCard::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gradient-brand);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.featureCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-hover);
+}
+
+.featureCard:hover::before {
+  opacity: 1;
+}
+
+.featureCard:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* Staggered animation delays */
+.featureCard:nth-child(1) { animation-delay: 0.1s; }
+.featureCard:nth-child(2) { animation-delay: 0.15s; }
+.featureCard:nth-child(3) { animation-delay: 0.2s; }
+.featureCard:nth-child(4) { animation-delay: 0.25s; }
+
+@keyframes featureEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.featureContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+}
+
+/* Feature Icon - Enhanced with glow effect */
+.featureIcon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-elevated) 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+}
+
+.featureIcon::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--gradient-brand);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--transition-normal);
+  filter: blur(8px);
+}
+
+.featureCard:hover .featureIcon {
+  transform: scale(1.05);
+  border-color: var(--border-accent);
+}
+
+.featureCard:hover .featureIcon::after {
+  opacity: 0.4;
+}
+
+.featureInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.featureTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.featureTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Badge Styles - Differentiated Popular vs Pro */
+.featureBadge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+}
+
+.featureBadgePopular {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(52, 211, 153, 0.15) 100%);
+  color: var(--brand-primary);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.featureBadgePro {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.15) 100%);
+  color: var(--brand-gold);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.featureBadgePro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.4), transparent);
+  animation: shimmerBadge 2s ease-in-out infinite;
+}
+
+@keyframes shimmerBadge {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.featureDescription {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Feature Status Indicator */
+.featureStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.featureStatusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.featureArrow {
+  color: var(--text-muted);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.featureCard:hover .featureArrow {
+  transform: translateX(4px);
+  color: var(--brand-primary);
+}
+
+/* ============================================
+   STATS SECTION
+   ============================================ */
+
+.statsSection {
+  padding: 0 var(--space-md);
+  animation: fadeInUp 0.5s ease-out 0.35s both;
+}
+
+/* ============================================
+   LIVE ACTIVITY SECTION
+   ============================================ */
+
+.activitySection {
+  padding: 0 var(--space-md);
+  animation: fadeInUp 0.5s ease-out 0.4s both;
+}
+
+/* ============================================
+   USER STATS SECTION - Enhanced
+   ============================================ */
+
+.userStatsSection {
+  padding: 0 var(--space-md);
+  animation: fadeInUp 0.5s ease-out 0.45s both;
+}
+
+.liveCounterWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+}
+
+.statsGrid {
+  display: flex;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.statsGrid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  text-align: center;
+  position: relative;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.statDivider {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(180deg, transparent 0%, var(--border-default) 20%, var(--border-default) 80%, transparent 100%);
+}
+
+/* ============================================
+   LOADING & ERROR STATES
+   ============================================ */
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.loadingMessage {
+  color: var(--text-secondary);
+  margin-top: var(--space-lg);
+  font-size: var(--text-base);
+  animation: fadeInUp 0.4s ease-out 0.2s both;
+}
+
+.errorContainer {
+  padding: var(--space-lg);
+}
+
+.errorDebug {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  word-break: break-all;
+}
+
+.errorDebugTitle {
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .userName,
+  .tagline,
+  .greetingText,
+  .premiumBadge,
+  .telegramBranding,
+  .featureCard,
+  .statsSection,
+  .activitySection,
+  .userStatsSection {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .heroBackground::before,
+  .heroBackground::after,
+  .premiumBadge::before,
+  .featureBadgePro::before {
+    animation: none;
+  }
+
+  .premiumIcon,
+  .featureStatusDot {
+    animation: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 380px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .userName {
+    font-size: var(--text-2xl);
+  }
+
+  .featureContent {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .featureIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .featureTitle {
+    font-size: var(--text-sm);
+  }
+
+  .featureDescription {
+    font-size: var(--text-xs);
+  }
+
+  .statsGrid {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .statValue {
+    font-size: var(--text-base);
+  }
+}

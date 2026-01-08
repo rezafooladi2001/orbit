@@ -1,0 +1,51 @@
+RewriteEngine On
+RewriteBase /RockyTap/api/
+
+# Disable directory slash redirect for API endpoints
+DirectorySlash Off
+
+# Handle OPTIONS preflight - let PHP handle it by routing to any endpoint
+# The bootstrap.php will respond with proper CORS headers
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+)/?$ $1/index.php [L]
+
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2/index.php [L]
+
+# If file exists, serve it directly
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Route requests to index.php in subdirectories (with or without trailing slash)
+# First check if it's a directory and route to index.php
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)/?$ $1/index.php [L]
+
+# Handle nested paths like /airdrop/status -> /airdrop/status/index.php
+# Check if adding /index.php makes it a valid file
+RewriteCond %{REQUEST_FILENAME}/index.php -f
+RewriteRule ^(.*)/?$ $1/index.php [L]
+
+# Handle single-level paths like /me -> /me/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.php$
+RewriteCond %{DOCUMENT_ROOT}/RockyTap/api/$1/index.php -f
+RewriteRule ^([^/]+)/?$ $1/index.php [L]
+
+# Handle two-level paths like /airdrop/status -> /airdrop/status/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.php$
+RewriteCond %{DOCUMENT_ROOT}/RockyTap/api/$1/$2/index.php -f
+RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2/index.php [L]
+
+# Handle three-level paths like /airdrop/withdrawal/verify -> /airdrop/withdrawal/verify/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.php$
+RewriteCond %{DOCUMENT_ROOT}/RockyTap/api/$1/$2/$3/index.php -f
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ $1/$2/$3/index.php [L]
+
