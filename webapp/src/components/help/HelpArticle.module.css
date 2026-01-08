@@ -1,0 +1,130 @@
+.container {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.articleHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category {
+  display: inline-block;
+  font-size: var(--text-xs);
+  color: var(--brand-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+}
+
+.content {
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  color: var(--text-primary);
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.content h1 {
+  font-size: var(--text-2xl);
+}
+
+.content h2 {
+  font-size: var(--text-xl);
+}
+
+.content h3 {
+  font-size: var(--text-lg);
+}
+
+.content p {
+  margin-bottom: 16px;
+}
+
+.content ul,
+.content ol {
+  margin-left: 20px;
+  margin-bottom: 16px;
+}
+
+.content li {
+  margin-bottom: 8px;
+}
+
+.content code {
+  background: var(--bg-elevated);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  font-size: var(--text-sm);
+  color: var(--brand-primary);
+}
+
+.content pre {
+  background: var(--bg-elevated);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.content pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.relatedSection {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-default);
+}
+
+.relatedTitle {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+}
+
+.relatedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.relatedItem {
+  margin: 0;
+}
+
+.relatedLink {
+  color: var(--brand-primary);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  transition: color var(--transition-fast);
+}
+
+.relatedLink:hover {
+  color: var(--brand-gold);
+  text-decoration: underline;
+}
+
+.actions {
+  padding-bottom: 20px;
+}
+

@@ -1,0 +1,262 @@
+/* App Settings - Premium Design */
+
+/* ==================== Settings Group ==================== */
+
+.settingsGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.settingItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.settingItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.settingItem:first-child {
+  padding-top: 0;
+}
+
+.settingInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.settingTitle {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.settingDescription {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ==================== Toggle Switch ==================== */
+
+.toggle {
+  position: relative;
+  width: 52px;
+  height: 30px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-default);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.toggle:hover:not(:disabled) {
+  border-color: var(--border-hover);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+.toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggleActive {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggleActive .toggleThumb {
+  transform: translateX(22px);
+}
+
+/* Toggle animation on press */
+.toggle:active:not(:disabled) .toggleThumb {
+  width: 24px;
+}
+
+.toggleActive:active:not(:disabled) .toggleThumb {
+  transform: translateX(18px);
+}
+
+/* ==================== Notification Channels ==================== */
+
+.notificationChannels {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-default);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.channelsLabel {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.channelsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.channelItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+}
+
+.channelIcon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.channelName {
+  flex: 1;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.channelStatus {
+  font-size: var(--text-xs);
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* ==================== Theme Selector ==================== */
+
+.themeSelector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.themeIcon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.themeValue {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ==================== Language Display ==================== */
+
+.languageDisplay {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.languageFlag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.languageValue {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ==================== App Info ==================== */
+
+.appInfo {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-default);
+}
+
+.appInfoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.appInfoLabel {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ==================== Responsive ==================== */
+
+@media (max-width: 380px) {
+  .settingItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  
+  .toggle {
+    align-self: flex-end;
+  }
+  
+  .themeSelector,
+  .languageDisplay {
+    align-self: flex-end;
+  }
+}
+
+/* ==================== Reduced Motion ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle,
+  .toggleThumb,
+  .notificationChannels {
+    animation: none;
+    transition: none;
+  }
+}

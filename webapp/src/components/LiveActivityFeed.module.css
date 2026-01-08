@@ -1,0 +1,371 @@
+/**
+ * LiveActivityFeed Styles - Enhanced with cleaner design and better animations
+ */
+
+.container {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(26, 32, 48, 0.9) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle top glow */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: radial-gradient(ellipse at 50% -20%, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  z-index: 1;
+}
+
+.liveIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-full);
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  background: var(--brand-primary);
+  border-radius: 50%;
+  animation: livePulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+@keyframes livePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+.title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-left: auto;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 260px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Fade out bottom items */
+.activityList::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
+  animation: activityEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.activityItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-subtle);
+  transform: translateX(4px);
+}
+
+@keyframes activityEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.userName {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.amount {
+  font-weight: 700;
+  color: var(--brand-primary);
+}
+
+.amountNegative {
+  color: var(--error);
+}
+
+.tickets {
+  color: var(--brand-gold);
+  font-weight: 600;
+}
+
+.tradingPair {
+  font-weight: 500;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.08);
+  margin-left: 4px;
+}
+
+.time {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* ============================================
+   ACTIVITY TYPE SPECIFIC STYLES
+   ============================================ */
+
+.deposit .icon {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.2);
+  color: var(--brand-primary);
+}
+
+.lottery_purchase .icon {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.2);
+  color: var(--brand-gold);
+}
+
+.lottery_win .icon {
+  background: rgba(234, 179, 8, 0.15);
+  border-color: rgba(234, 179, 8, 0.3);
+  color: var(--brand-gold);
+}
+
+.lottery_win .amount {
+  color: var(--brand-gold);
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+}
+
+.ai_trader_deposit .icon {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.2);
+  color: var(--info);
+}
+
+.ai_trader_profit .icon {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.2);
+  color: var(--success);
+}
+
+.referral_join .icon {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+}
+
+.referral_reward .icon {
+  background: rgba(236, 72, 153, 0.12);
+  border-color: rgba(236, 72, 153, 0.2);
+  color: #ec4899;
+}
+
+/* ============================================
+   COMPACT VARIANT
+   ============================================ */
+
+.compact .header {
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
+}
+
+.compact .activityItem {
+  padding: 8px 10px;
+  gap: 8px;
+}
+
+.compact .icon {
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+}
+
+.compact .text {
+  font-size: var(--text-xs);
+}
+
+.compact .activityList {
+  max-height: 200px;
+}
+
+/* ============================================
+   MINIMAL VARIANT
+   ============================================ */
+
+.minimal {
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: none;
+}
+
+.minimal::before {
+  display: none;
+}
+
+.minimal .header {
+  margin-bottom: var(--space-xs);
+  padding-bottom: var(--space-xs);
+}
+
+.minimal .activityList {
+  max-height: 140px;
+  gap: 4px;
+}
+
+.minimal .activityList::after {
+  display: none;
+}
+
+.minimal .activityItem {
+  padding: 6px 8px;
+  background: transparent;
+  border: none;
+  gap: 8px;
+}
+
+.minimal .activityItem:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.minimal .icon {
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  background: transparent;
+  border: none;
+}
+
+.minimal .text {
+  font-size: 11px;
+}
+
+.minimal .time {
+  font-size: 9px;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .liveDot {
+    animation: none;
+  }
+
+  .activityItem {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .activityItem:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 380px) {
+  .container {
+    padding: var(--space-sm);
+  }
+
+  .activityItem {
+    padding: 8px 10px;
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .text {
+    font-size: var(--text-xs);
+  }
+}

@@ -1,0 +1,245 @@
+/* Settings Screen - Premium Design */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-bottom: var(--space-xl);
+  animation: pageEnter 0.4s ease-out;
+}
+
+@keyframes pageEnter {
+  from { 
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== Header ==================== */
+
+.header {
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.headerIcon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.headerText {
+  flex: 1;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: 4px 0 0 0;
+}
+
+/* ==================== Section Navigation ==================== */
+
+.sectionNav {
+  position: relative;
+  display: flex;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-lg);
+  margin: 0 var(--space-md);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 var(--space-lg);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+}
+
+.sectionNav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Animated indicator */
+.indicator {
+  position: absolute;
+  top: var(--space-sm);
+  bottom: var(--space-sm);
+  left: 0;
+  background: var(--gradient-brand);
+  border-radius: var(--radius-lg);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 0;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.sectionNavButton {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
+
+.sectionNavButton:hover {
+  color: var(--text-primary);
+}
+
+.sectionNavButton.active {
+  color: white;
+}
+
+.sectionNavButton:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+.navIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.sectionNavButton.active .navIcon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.navLabel {
+  font-family: var(--font-body);
+}
+
+/* ==================== Content ==================== */
+
+.content {
+  flex: 1;
+  padding: var(--space-lg) var(--space-lg) 0;
+}
+
+.contentInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: contentEnter 0.35s ease-out;
+}
+
+/* Stagger animation for cards */
+.contentInner > * {
+  animation: cardEnter 0.4s ease-out both;
+}
+
+.contentInner > *:nth-child(1) { animation-delay: 0.05s; }
+.contentInner > *:nth-child(2) { animation-delay: 0.1s; }
+.contentInner > *:nth-child(3) { animation-delay: 0.15s; }
+.contentInner > *:nth-child(4) { animation-delay: 0.2s; }
+.contentInner > *:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes contentEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== Logout Section ==================== */
+
+.logoutSection {
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.logoutHint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin: 0;
+  text-align: center;
+}
+
+/* ==================== Responsive ==================== */
+
+@media (max-width: 380px) {
+  .sectionNavButton {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--text-xs);
+  }
+  
+  .navIcon {
+    display: none;
+  }
+  
+  .header {
+    padding: var(--space-md);
+  }
+  
+  .content {
+    padding: var(--space-md) var(--space-md) 0;
+  }
+}
+
+/* ==================== Reduced Motion ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .contentInner,
+  .indicator {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
 vendor/
+package-lock.json
 
 # Build outputs
 dist/
@@ -25,4 +26,7 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Vite
+.vite/
 

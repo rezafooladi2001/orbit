@@ -1,0 +1,37 @@
+.banner {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--warning);
+  color: var(--bg-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  animation: slideDown 0.3s ease-out;
+}
+
+.reconnected {
+  background: var(--success);
+  color: #fff;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.message {
+  flex: 1;
+  text-align: center;
+}
+

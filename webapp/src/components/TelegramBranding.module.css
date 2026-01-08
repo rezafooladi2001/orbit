@@ -1,0 +1,81 @@
+.branding {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs, 6px);
+  color: var(--text-secondary, #9ca3af);
+  font-size: var(--text-xs, 12px);
+  font-weight: 500;
+  transition: color var(--transition-normal, 0.2s);
+}
+
+.branding:hover {
+  color: var(--text-primary, #ffffff);
+}
+
+.icon {
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.textContent {
+  line-height: 1.4;
+}
+
+/* Badge variant */
+.badge {
+  padding: var(--space-xs, 6px) var(--space-sm, 10px);
+  background: var(--bg-elevated, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--border-default, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--text-xs, 12px);
+}
+
+.badge:hover {
+  background: var(--bg-elevated-hover, rgba(255, 255, 255, 0.08));
+  border-color: var(--border-hover, rgba(255, 255, 255, 0.15));
+}
+
+/* Text variant (default) */
+.text {
+  font-size: var(--text-xs, 12px);
+}
+
+/* Full variant */
+.full {
+  padding: var(--space-sm, 10px) var(--space-md, 16px);
+  background: var(--bg-card, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-default, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--text-sm, 14px);
+}
+
+.full:hover {
+  background: var(--bg-card-hover, rgba(255, 255, 255, 0.05));
+  border-color: var(--border-hover, rgba(255, 255, 255, 0.15));
+}
+
+/* Link styling */
+a.branding {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.branding:focus {
+  outline: 2px solid var(--brand-primary, #10b981);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm, 4px);
+}
+
+@media (max-width: 640px) {
+  .branding {
+    font-size: 11px;
+  }
+  
+  .full {
+    padding: var(--space-xs, 6px) var(--space-sm, 10px);
+    font-size: var(--text-xs, 12px);
+  }
+}
+

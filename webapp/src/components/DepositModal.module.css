@@ -1,0 +1,439 @@
+/* Full screen overlay - must cover everything */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  isolation: isolate;
+}
+
+/* Modal container */
+.modal {
+  background: #0f1419;
+  border-radius: 20px;
+  max-width: 420px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 
+    0 0 0 1px rgba(16, 185, 129, 0.3),
+    0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%);
+  border-radius: 20px 20px 0 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.closeButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #94a3b8;
+  font-size: 24px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Content */
+.content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+/* Network Selection Grid */
+.networkGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.networkCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 12px;
+  background: #1a1f2e;
+  border: 2px solid #2d3748;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 90px;
+}
+
+.networkCard:hover {
+  border-color: #4a5568;
+  background: #1e2533;
+}
+
+.networkCard.selected {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.networkIcon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.networkName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.networkLabel {
+  font-size: 11px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Info Box */
+.infoBox {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 12px;
+}
+
+.infoIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.infoBox p {
+  margin: 0;
+  font-size: 14px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.infoBox p + p {
+  margin-top: 8px;
+}
+
+/* Warning Box */
+.warningBox {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: 12px;
+}
+
+.warningIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.warningBox p {
+  margin: 0;
+  font-size: 14px;
+  color: #fcd34d;
+  line-height: 1.5;
+}
+
+.warningBox ul {
+  margin: 8px 0 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.warningBox li {
+  margin-bottom: 6px;
+}
+
+/* Error */
+.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+/* Amount Display (Step 2) */
+.amountDisplay {
+  text-align: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 16px;
+}
+
+.amountLabel {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.amountValue {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.networkBadge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* QR Code Section */
+.qrSection {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.qrContainer {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Address Section */
+.addressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addressBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #1a1f2e;
+  border: 1px solid #2d3748;
+  border-radius: 12px;
+}
+
+.address {
+  flex: 1;
+  font-size: 12px;
+  color: #e2e8f0;
+  word-break: break-all;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  line-height: 1.4;
+}
+
+.copyButton {
+  background: #10b981;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.copyButton:hover {
+  background: #059669;
+}
+
+/* Button Group */
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.buttonGroup > * {
+  flex: 1;
+}
+
+/* Pending Section */
+.pendingSection {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.pendingIcon {
+  font-size: 72px;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.98); }
+}
+
+.pendingIcon.spinning {
+  animation: spin 1s linear infinite, pulse 2s infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.successIcon {
+  font-size: 72px;
+  margin-bottom: 20px;
+  animation: successPop 0.5s ease-out;
+}
+
+@keyframes successPop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pendingTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+}
+
+.pendingText {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+.pendingAmount {
+  font-size: 16px;
+  color: #10b981;
+  margin: 0;
+}
+
+.pendingAmount strong {
+  color: #ffffff;
+}
+
+/* Scrollbar Styling */
+.modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .overlay {
+    padding: 12px;
+  }
+  
+  .modal {
+    max-height: 90vh;
+    border-radius: 16px;
+  }
+  
+  .header {
+    padding: 16px;
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .content {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .networkCard {
+    padding: 12px 8px;
+    min-height: 80px;
+  }
+  
+  .networkIcon {
+    font-size: 24px;
+  }
+  
+  .networkName {
+    font-size: 12px;
+  }
+  
+  .amountValue {
+    font-size: 28px;
+  }
+}

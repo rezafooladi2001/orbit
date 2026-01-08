@@ -1,0 +1,721 @@
+.container {
+  padding: var(--space-lg) var(--space-md);
+  padding-bottom: calc(var(--space-lg) + 80px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==================== Balance Section ==================== */
+.balanceSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) 0;
+}
+
+.balanceLabel {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.balanceValue {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.ghdAmount {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  background: var(--gradient-premium);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ghdSymbol {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.usdtEstimate {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.pendingTaps {
+  font-size: var(--text-xs);
+  color: var(--success);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Convert Progress */
+.convertProgress {
+  width: 100%;
+  max-width: 200px;
+  margin-top: var(--space-sm);
+}
+
+.convertProgressBar {
+  height: 4px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.convertProgressFill {
+  height: 100%;
+  background: var(--gradient-brand);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease-out;
+}
+
+.convertProgressText {
+  display: block;
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* ==================== Session Stats Bar ==================== */
+.sessionStatsBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+}
+
+.sessionStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sessionStatValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sessionStatLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sessionStatDivider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-default);
+}
+
+/* ==================== Tap Section ==================== */
+.tapSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+}
+
+.tapHeader {
+  text-align: center;
+}
+
+.tapTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-xs);
+}
+
+.tapSubtitle {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.tapButtonWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+}
+
+/* ==================== Progress Ring ==================== */
+.progressRing {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.progressRingBg {
+  stroke: var(--bg-tertiary);
+}
+
+.progressRingFill {
+  stroke: var(--brand-primary);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease-out;
+  filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.4));
+}
+
+/* ==================== Tap Button ==================== */
+.tapButton {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--bg-elevated) 0%, var(--bg-tertiary) 100%);
+  border: 3px solid var(--border-accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s ease, box-shadow 0.15s ease;
+  box-shadow: 
+    0 0 0 1px rgba(16, 185, 129, 0.1),
+    0 0 40px rgba(16, 185, 129, 0.2),
+    0 10px 40px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  /* Optimize for touch */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  /* GPU acceleration */
+  will-change: transform;
+  transform: translateZ(0);
+  /* 3D depth */
+  transform-style: preserve-3d;
+}
+
+/* Idle pulsing glow */
+.tapButton::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%);
+  opacity: 0.5;
+  animation: idlePulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes idlePulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.tapButton:hover {
+  transform: scale(1.03) translateZ(0);
+  box-shadow: 
+    0 0 0 1px rgba(16, 185, 129, 0.2),
+    0 0 60px rgba(16, 185, 129, 0.3),
+    0 10px 50px rgba(0, 0, 0, 0.5);
+}
+
+.tapButton:active,
+.tapButton.tapping {
+  transform: scale(0.92) translateZ(-5px);
+  box-shadow: 
+    0 0 0 1px rgba(16, 185, 129, 0.3),
+    0 0 20px rgba(16, 185, 129, 0.4),
+    inset 0 5px 20px rgba(0, 0, 0, 0.3),
+    0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ==================== Tap Ripples ==================== */
+.tapRipple,
+.tapRipple2,
+.tapRipple3 {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.5) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.tapButton:active .tapRipple,
+.tapButton.tapping .tapRipple {
+  animation: ripple1 0.4s ease-out;
+}
+
+.tapButton:active .tapRipple2,
+.tapButton.tapping .tapRipple2 {
+  animation: ripple2 0.5s ease-out 0.05s;
+}
+
+.tapButton:active .tapRipple3,
+.tapButton.tapping .tapRipple3 {
+  animation: ripple3 0.6s ease-out 0.1s;
+}
+
+@keyframes ripple1 {
+  0% {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple2 {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple3 {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ==================== Floating Numbers ==================== */
+.floatingContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.floatingNumber {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  pointer-events: none;
+  opacity: 0;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.floatingNumber.floatingNumberActive {
+  animation: floatUp 0.7s ease-out forwards;
+}
+
+.floatingNumber.floatingNumberMilestone {
+  font-size: 32px;
+  color: var(--brand-gold);
+  text-shadow: 
+    0 0 10px rgba(251, 191, 36, 0.8),
+    0 0 20px rgba(251, 191, 36, 0.4);
+}
+
+.floatingNumber.floatingNumberMilestone.floatingNumberActive {
+  animation: floatUpMilestone 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-70px) scale(0.7);
+  }
+}
+
+@keyframes floatUpMilestone {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-20px) scale(1.3);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(0.5);
+  }
+}
+
+/* ==================== Combo Indicator ==================== */
+.comboIndicator {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--gradient-brand);
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  animation: comboPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.comboIndicator.comboHot {
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.5);
+  animation: comboShake 0.3s ease-in-out infinite;
+}
+
+@keyframes comboPop {
+  0% {
+    transform: translateX(-50%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes comboShake {
+  0%, 100% { transform: translateX(-50%) rotate(-1deg); }
+  50% { transform: translateX(-50%) rotate(1deg); }
+}
+
+.comboCount {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: #fff;
+}
+
+.comboLabel {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.comboFlame {
+  font-size: 16px;
+  animation: flameWiggle 0.3s ease-in-out infinite;
+}
+
+@keyframes flameWiggle {
+  0%, 100% { transform: rotate(-5deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.1); }
+}
+
+/* ==================== Combo Milestone Celebration ==================== */
+.comboMilestone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  animation: milestoneCelebrate 1.5s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.milestoneValue {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--brand-gold);
+  text-shadow: 
+    0 0 20px rgba(251, 191, 36, 0.8),
+    0 0 40px rgba(251, 191, 36, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.milestoneText {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes milestoneCelebrate {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ==================== Tap Stats ==================== */
+.tapStats {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.tapStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.tapStatValue {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--brand-primary);
+}
+
+.tapStatLabel {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* ==================== Sync Indicator ==================== */
+.syncIndicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.syncSpinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-default);
+  border-top-color: var(--brand-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== Convert Section ==================== */
+.convertInfo {
+  margin-bottom: var(--space-md);
+}
+
+.convertRate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.rateLabel {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.rateValue {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.convertForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Quick Amount Buttons */
+.quickAmounts {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.quickAmountBtn {
+  flex: 1;
+  /* Minimum touch target */
+  min-height: 44px;
+  padding: var(--space-sm) var(--space-sm);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  /* Improve touch */
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.quickAmountBtn:hover:not(:disabled) {
+  background: var(--bg-elevated);
+  border-color: var(--border-accent);
+  color: var(--brand-primary);
+}
+
+.quickAmountBtn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.quickAmountBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.maxButton {
+  background: var(--gradient-brand);
+  color: #fff;
+  border: none;
+  /* Minimum touch target */
+  min-height: 44px;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  /* Improve touch */
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.maxButton:hover {
+  opacity: 0.9;
+}
+
+.maxButton:active {
+  transform: scale(0.95);
+}
+
+.convertPreview {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--space-sm);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.convertPreview strong {
+  color: var(--success);
+}
+
+.convertActions {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.convertActions > * {
+  flex: 1;
+}
+
+/* ==================== USDT Balance ==================== */
+.usdtBalance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.usdtLabel {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.usdtValue {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--success);
+}
+
+/* ==================== Reduced Motion ==================== */
+@media (prefers-reduced-motion: reduce) {
+  .tapButton::before,
+  .comboIndicator,
+  .floatingNumber,
+  .syncSpinner {
+    animation: none;
+  }
+  
+  .tapButton:active,
+  .tapButton.tapping {
+    transform: scale(0.95);
+  }
+}
